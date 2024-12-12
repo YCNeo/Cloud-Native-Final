@@ -16,16 +16,17 @@ USE `cns_db`;
 
 -- Insert data into 'user' table
 INSERT INTO `user` VALUES
-('U001', 'user1', 'user1@example.com', 'c2b7e8d7a4c236b06b9ab7d1ad2d2f0c16e0590da4d6e5fb10f194b48e59bf4a', '1234567890', 'User 1 description', NULL, '1990-01-01', '0', NOW(), NULL),
-('U002', 'user2', 'user2@example.com', '6b3a55e0261b0304143a9a035ad9286e45f864c6fa56f09459048caa8b196f31', '1234567891', 'User 2 description', NULL, '1991-02-02', '1', NOW(), NULL),
-('U003', 'user3', 'user3@example.com', 'af7c3f4f72524e1dc1262f69835f0a580f832e0916c70131acbafaa78a81a9a1', '1234567892', 'User 3 description', NULL, '1992-03-03', '2', NOW(), NULL),
-('U004', 'user4', 'user4@example.com', '3d6f46dc79fa5f9aa990c00fbf84dc607efac741e6206162a8f55122fa5301b0', '1234567893', 'User 4 description', NULL, '1993-04-04', '0', NOW(), NULL),
-('U005', 'user5', 'user5@example.com', '31e16fa6eb186b2a0e3c0ba75d28e9b5c5b16e72985eea0a04911a02dc532538', '1234567894', 'User 5 description', NULL, '1994-05-05', '1', NOW(), NULL),
-('U006', 'user6', 'user6@example.com', '371c7e4d61941e0b69ca92051e0f72e4e8309f2fa323383d5c6e35516b8a5662', '1234567895', 'User 6 description', NULL, '1995-06-06', '2', NOW(), NULL),
-('U007', 'user7', 'user7@example.com', 'ecb47222e7f7d6f3882d77f43aa58207d164b8da234ed4ae0cf9d7a61f8a6342', '1234567896', 'User 7 description', NULL, '1996-07-07', '0', NOW(), NULL),
-('U008', 'user8', 'user8@example.com', '2af6a6edaf0ddba8e1dfe55d3d8110f163d9a3e99964f0afc3fb969f0b3d9f4d', '1234567897', 'User 8 description', NULL, '1997-08-08', '1', NOW(), NULL),
-('U009', 'user9', 'user9@example.com', '979026f4dc45d8a77eb6920fbab4bf5068e1481041b4eb95a48f8e446e7d50b0', '1234567898', 'User 9 description', NULL, '1998-09-09', '2', NOW(), NULL),
-('U010', 'user10', 'user10@example.com', '669168ce8ff9a1e6e11cc24c4054f6b86e4e3d8d4ec03c9e64a2635fa17bf5b1', '1234567899', 'User 10 description', NULL, '1999-10-10', '0', NOW(), NULL);
+('U001', 'user1', 'user1@example.com', '0b14d501a594442a01c6859541bcb3e8164d183d32937b851835442f69d5c94e', '1234567890', 'User 1 description', NULL, '1990-01-01', '0', NOW(), NULL),
+('U002', 'user2', 'user2@example.com', '6cf615d5bcaac778352a8f1f3360d23f02f34ec182e259897fd6ce485d7870d4', '1234567891', 'User 2 description', NULL, '1991-02-02', '1', NOW(), NULL),
+('U003', 'user3', 'user3@example.com', '5906ac361a137e2d286465cd6588ebb5ac3f5ae955001100bc41577c3d751764', '1234567892', 'User 3 description', NULL, '1992-03-03', '2', NOW(), NULL),
+('U004', 'user4', 'user4@example.com', 'b97873a40f73abedd8d685a7cd5e5f85e4a9cfb83eac26886640a0813850122b', '1234567893', 'User 4 description', NULL, '1993-04-04', '0', NOW(), NULL),
+('U005', 'user5', 'user5@example.com', '8b2c86ea9cf2ea4eb517fd1e06b74f399e7fec0fef92e3b482a6cf2e2b092023', '1234567894', 'User 5 description', NULL, '1994-05-05', '1', NOW(), NULL),
+('U006', 'user6', 'user6@example.com', '598a1a400c1dfdf36974e69d7e1bc98593f2e15015eed8e9b7e47a83b31693d5', '1234567895', 'User 6 description', NULL, '1995-06-06', '2', NOW(), NULL),
+('U007', 'user7', 'user7@example.com', '5860836e8f13fc9837539a597d4086bfc0299e54ad92148d54538b5c3feefb7c', '1234567896', 'User 7 description', NULL, '1996-07-07', '0', NOW(), NULL),
+('U008', 'user8', 'user8@example.com', '57f3ebab63f156fd8f776ba645a55d96360a15eeffc8b0e4afe4c05fa88219aa', '1234567897', 'User 8 description', NULL, '1997-08-08', '1', NOW(), NULL),
+('U009', 'user9', 'user9@example.com', '9323dd6786ebcbf3ac87357cc78ba1abfda6cf5e55cd01097b90d4a286cac90e', '1234567898', 'User 9 description', NULL, '1998-09-09', '2', NOW(), NULL),
+('U010', 'user10', 'user10@example.com', 'aa4a9ea03fcac15b5fc63c949ac34e7b0fd17906716ac3b8e58c599cdc5a52f0', '1234567899', 'User 10 description', NULL, '1999-10-10', '0', NOW(), NULL);
+
 
 -- Insert data into 'groups' table
 INSERT INTO `groups` VALUES

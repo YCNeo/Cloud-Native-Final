@@ -2,10 +2,11 @@ import {
   EventLogRepositoryModel,
   HardwareLogRepositoryModel,
 } from "./model.ts";
-import pool from "../mysql.ts";
+import mysqlPool from "../mysql.ts";
+
 
 export async function eventLogRepository(log: EventLogRepositoryModel) {
-  const connection = await pool.getConnection();
+  const connection = await mysqlPool.getConnection();
   try {
     const query = `
       INSERT INTO event_logs (uid, event)
@@ -21,7 +22,7 @@ export async function eventLogRepository(log: EventLogRepositoryModel) {
 }
 
 export async function hardwareLogRepository(log: HardwareLogRepositoryModel) {
-  const connection = await pool.getConnection();
+  const connection = await mysqlPool.getConnection();
   try {
     const query = `
       INSERT INTO hardware_performance_logs (cpu, ram, disk)

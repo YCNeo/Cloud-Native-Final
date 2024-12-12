@@ -1,14 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import login from './app/loginPage/login.tsx';
+import React from 'react';
 export default function App() {
+  const Stack = createStackNavigator();
   return (
-    <View style={styles.container}>
-      <Text>OverDesign is suck</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen name="Login" component={login} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      );
+    }
 
 const styles = StyleSheet.create({
   container: {

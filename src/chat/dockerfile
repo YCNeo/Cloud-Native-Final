@@ -1,7 +1,5 @@
 FROM denoland/deno:alpine
 
-USER deno
-
 WORKDIR /app
 
 COPY . /app/

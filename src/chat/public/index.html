@@ -59,9 +59,10 @@
       const messageInput = document.getElementById("message-input");
 
       // Join a room
+      const profile = prompt("Enter your ID and name, e.g. U123,Alice: ");
       const room = prompt("Enter room name:");
-      const userName = prompt("Enter your name:");
-      socket.emit("joinRoom", { room, userName });
+      const [userId, userName] = profile.split(",");
+      socket.emit("joinRoom", { room, userId, userName });
 
       // Listen for messages
       socket.on("currentMessage", (data) => {
