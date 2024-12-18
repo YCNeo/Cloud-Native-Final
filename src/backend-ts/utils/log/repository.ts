@@ -4,6 +4,7 @@ import {
 } from "./model.ts";
 import mysqlPool from "../mysql.ts";
 
+
 export async function eventLogRepository(log: EventLogRepositoryModel) {
   const connection = await mysqlPool.getConnection();
   try {

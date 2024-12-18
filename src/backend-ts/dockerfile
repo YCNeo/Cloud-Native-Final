@@ -2,9 +2,12 @@ FROM denoland/deno:alpine
 
 WORKDIR /app
 
-COPY . /app/
+COPY package*.json /app/ 
+COPY deno.lock /app/
 
 RUN deno install
+
+COPY . /app/
 
 EXPOSE 8000
 

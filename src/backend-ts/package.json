@@ -19,11 +19,21 @@
   },
   "type": "module",
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.1.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",
+    "expo-secure-store": "^14.0.0",
     "express": "^4.21.1",
+    "express-session": "^1.18.1",
     "ioredis": "^5.4.1",
+    "js-sha256": "^0.11.0",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.11.4",
     "node-cron": "^3.0.3",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
     "systeminformation": "^5.23.5"
   },
   "devDependencies": {

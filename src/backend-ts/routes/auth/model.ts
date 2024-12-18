@@ -13,3 +13,14 @@ export type DtoModel = {
 export type ViewModel = {
   jwtToken: string;
 };
+
+export type registerModel = {
+  name: string;
+  mail: string;
+  hashPassword: string;
+};
+
+export type searchResult = {
+  success: boolean;
+  mail: string;
+};
