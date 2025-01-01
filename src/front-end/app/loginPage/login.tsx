@@ -48,7 +48,7 @@ export default function login() {
         
         const encryptedToken = CryptoJS.AES.encrypt(jwtToken, 'your-secret-key').toString();
         localStorage.setItem("jwtToken", encryptedToken);
-        console.log("Token saved to asyncstorage");
+        console.log("Token saved to asyncstorage ");
         frontendRouter.navigate("/(tabs)/home");
       } else if (response.status === 401) {
         // Alert.alert('Login Failed', 'Invalid email or password. Please try again.');
