@@ -46,7 +46,14 @@ const chatrooms: ChatroomProps[] = [
   },
 ];
 
-const socket = io("http://localhost:8080");
+const serverIP = "http://13.55.102.75";
+const socketPort = "8080";
+const apiPort = "8000";
+
+const socketServer = `${serverIP}:${socketPort}`;
+const apiServer = `${serverIP}:${apiPort}`;
+
+const socket = io(socketServer);
 
 export default function Chatrooms() {
   const router = useRouter();
@@ -82,7 +89,7 @@ export default function Chatrooms() {
       if (token) {
         try {
           const response = await axios.post(
-            `http://localhost:8000/auth/vertifyToken`,
+            `${apiServer}/auth/vertifyToken`,
             { JWTtoken: token }
           );
           setUserdata(response.data);
@@ -106,7 +113,7 @@ export default function Chatrooms() {
       const fetchChatrooms = async () => {
         try {
           const response = await axios.post(
-            "http://localhost:8000/chatroom/userGetChatroomRedis",
+            `${apiServer}/chatroom/userGetChatroomRedis`,
             {
               user: userdata.userID, // 使用從 token 中獲取的使用者 ID
             }
@@ -118,8 +125,13 @@ export default function Chatrooms() {
               name: chatroom.name,
             })
           );
-          setChatrooms(newChatrooms);
-          console.log("HAHA!", newChatrooms);
+          const uniqueChatrooms = newChatrooms.filter(
+            (chatroom:ChatroomProps, index:number, self:ChatroomProps[]) =>
+              index === self.findIndex((c) => c.room_id === chatroom.room_id)
+          );
+
+          setChatrooms(uniqueChatrooms);
+          console.log("HAHA!", uniqueChatrooms);
         } catch (error) {
           console.error("Error fetching chatrooms", error);
         }
@@ -173,7 +185,7 @@ export default function Chatrooms() {
     const chars =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let code = "";
-    const res = await axios.get("http://localhost:8000/chatroom/getChatrooms");
+    const res = await axios.get(`${apiServer}/chatroom/getChatrooms`);
     console.log(res.data);
 
     let uniqueFound = false;
@@ -190,7 +202,7 @@ export default function Chatrooms() {
 
   const confirmChatroom = () => {
     const parsedUserData = JSON.parse(localStorage.getItem("userData") || "{}");
-    axios.post("http://localhost:8000/chatroom/createChatroom", {
+    axios.post(`${apiServer}/chatroom/createChatroom`, {
       roomId: randomCode,
       roomName: chatroomName,
       userId: userdata.userID,

@@ -21,7 +21,7 @@ const app = express();
 const PORT = 8080;
 
 // Define the client URL
-const clientIP = "localhost";
+const clientIP = "13.55.102.75";
 const clientURL = `http://${clientIP}:8081`;
 const corsOptions = {
   origin: clientURL,
