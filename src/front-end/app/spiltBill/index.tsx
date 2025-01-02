@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useRouter, Link } from "expo-router";
 import axios from "axios";
-import { apiServer } from "@/constants/url";
+import { apiServer } from "@/constants/backendURL";
 
 const Accounting = () => {
   const frontendRouter = useRouter();

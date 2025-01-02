@@ -14,7 +14,7 @@ import { useRouter } from "expo-router";
 import { FontAwesome5 } from "@expo/vector-icons";
 import io from "socket.io-client";
 import axios from "axios";
-import { apiServer, socketServer } from "@/constants/url";
+import { apiServer, socketServer } from "@/constants/backendURL";
 
 interface ChatroomProps {
   id: number;

@@ -4,7 +4,7 @@ import styles from "./style";
 import { useRouter, Link } from "expo-router";
 import axios from "axios";
 import CryptoJS from "crypto-js";
-import { apiServer } from "@/constants/url";
+import { apiServer } from "@/constants/backendURL";
 
 export default function login() {
   const [email, setEmail] = useState("");

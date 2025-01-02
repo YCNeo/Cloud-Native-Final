@@ -24,7 +24,7 @@ import ChatroomProps, {
 import sampleMessages from "./constants/messages";
 import sampleAccounting from "./constants/accounting";
 import axios from "axios";
-import { apiServer, socketServer } from "@/constants/url";
+import { apiServer, socketServer } from "@/constants/backendURL";
 
 const socket = io(socketServer);
 const userId = 1; // Example user ID

@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import axios from "axios";
-import { apiServer } from "@/constants/url";
+import { apiServer } from "@/constants/backendURL";
 
 const AddExpense = ({ navigation }) => {
   const [payers, setPayers] = useState([""]); // 初始只有一位付款者

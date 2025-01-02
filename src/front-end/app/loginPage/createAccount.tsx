@@ -5,7 +5,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import axios from "axios";
 import CryptoJS from "crypto-js";
 import { useRouter, Link } from "expo-router";
-import { apiServer } from "@/constants/url";
+import { apiServer } from "@/constants/backendURL";
 
 export default function createAccount() {
   const [name, setName] = useState("");
