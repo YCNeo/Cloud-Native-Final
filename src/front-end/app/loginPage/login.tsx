@@ -15,6 +15,14 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Alert } from "react-native";
 
+const serverIP = "http://13.55.102.75";
+const socketPort = "8080";
+const apiPort = "8000";
+
+const socketServer = `${serverIP}:${socketPort}`;
+const apiServer = `${serverIP}:${apiPort}`;
+
+
 export default function login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +35,7 @@ export default function login() {
       console.log("Token:", token);       
       if (token) {
         try {
-          const response = await axios.post(`http://localhost:8000/auth/vertifyToken`, {JWTtoken: token});
+          const response = await axios.post(`${apiServer}/auth/vertifyToken`, {JWTtoken: token});
           const resposeTmp = response;
           console.log(response);
           console.log("Token exists", resposeTmp);
@@ -44,7 +52,7 @@ export default function login() {
   const handleLogin = async (email: string, password: string) => {
     const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
     try {
-      const response = await axios.post(`http://localhost:8000/auth/login`, {
+      const response = await axios.post(`${apiServer}/auth/login`, {
         email: email,
         password: hashedPassword,
       });
