@@ -8,13 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import axios from "axios";
-
-const serverIP = "http://13.55.102.75";
-const socketPort = "8080";
-const apiPort = "8000";
-
-const socketServer = `${serverIP}:${socketPort}`;
-const apiServer = `${serverIP}:${apiPort}`;
+import { apiServer } from "@/constants/url";
 
 const AddExpense = ({ navigation }) => {
   const [payers, setPayers] = useState([""]); // 初始只有一位付款者

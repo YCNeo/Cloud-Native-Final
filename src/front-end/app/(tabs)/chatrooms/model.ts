@@ -21,3 +21,9 @@ export interface Transaction {
   price: number;
   issplited: boolean;
 }
+
+export interface SplitTransaction {
+  from: number;
+  to: number;
+  amount: number;
+}

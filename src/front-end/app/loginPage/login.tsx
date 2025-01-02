@@ -1,27 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Pressable,
-} from "react-native";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import styles from "./style";
-import { Stack, useRouter, Navigator, router, Link } from "expo-router";
+import { useRouter, Link } from "expo-router";
 import axios from "axios";
 import CryptoJS from "crypto-js";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Alert } from "react-native";
-
-const serverIP = "http://13.55.102.75";
-const socketPort = "8080";
-const apiPort = "8000";
-
-const socketServer = `${serverIP}:${socketPort}`;
-const apiServer = `${serverIP}:${apiPort}`;
-
+import { apiServer } from "@/constants/url";
 
 export default function login() {
   const [email, setEmail] = useState("");
@@ -32,10 +15,12 @@ export default function login() {
   useEffect(() => {
     const checkToken = async () => {
       const token = localStorage.getItem("jwtToken");
-      console.log("Token:", token);       
+      console.log("Token:", token);
       if (token) {
         try {
-          const response = await axios.post(`${apiServer}/auth/vertifyToken`, {JWTtoken: token});
+          const response = await axios.post(`${apiServer}/auth/vertifyToken`, {
+            JWTtoken: token,
+          });
           const resposeTmp = response;
           console.log(response);
           console.log("Token exists", resposeTmp);
@@ -59,13 +44,11 @@ export default function login() {
       if (response.status === 200) {
         const jwtToken = response.data.jwttok;
 
-        // 存入 SecureStore        
+        // 存入 SecureStore
         localStorage.setItem("jwtToken", jwtToken);
         console.log("Token saved to localstorage");
         frontendRouter.navigate("/(tabs)/chatrooms");
       } else if (response.status === 401) {
-        // Alert.alert('Login Failed', 'Invalid email or password. Please try again.');
-        // window.alert('Login Failed Invalid email or password. Please try again.')
         console.log("登入錯誤：");
       }
     } catch (error) {

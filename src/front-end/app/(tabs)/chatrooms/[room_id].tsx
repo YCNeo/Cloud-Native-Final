@@ -10,113 +10,28 @@ import {
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import io from "socket.io-client";
-// import EmojiBoard from 'react-native-emoji-board'; // Make sure to install this package
 import NewTransactionInput, {
   InputTransactionProps,
 } from "./newTransactionInput";
-import ChatroomProps, { MessageProps } from "./model";
+import ChatroomProps, {
+  MessageProps,
+  SplitTransaction,
+  Transaction,
+} from "./model";
 
 import sampleMessages from "./constants/messages";
 import sampleAccounting from "./constants/accounting";
 import axios from "axios";
-
-const serverIP = "http://13.55.102.75";
-const socketPort = "8080";
-const apiPort = "8000";
-
-const socketServer = `${serverIP}:${socketPort}`;
-const apiServer = `${serverIP}:${apiPort}`;
+import { apiServer, socketServer } from "@/constants/url";
 
 const socket = io(socketServer);
 const userId = 1; // Example user ID
 
 const messages = sampleMessages;
-// INSERT INTO `accounting` (`title`, `super_cid`, `payer`, `attendees_ids`, `price`, `issplited`) VALUES
-// ('Dinner at Restaurant', 'crHjSb', 1, '2,3', 1200.50, FALSE), -- Alice 付錢，Bob 和 Charlie 分帳
-// ('Stationery Purchase', 'b63sTZ', 2, '1,3', 300.00, FALSE); -- Bob 付錢，Alice 和 Charlie 分帳
 
-interface Transaction {
-  id: number;
-  datetime: string;
-  title: string;
-  super_cid: string;
-  payer: number;
-  attendees_ids: number[];
-  price: number;
-  issplited: boolean;
-}
-
-interface SplitTransaction {
-  from: number;
-  to: number;
-  amount: number;
-}
-
-const accounting: Transaction[] = [
-  {
-    id: 1,
-    // datetime: "2021-10-01 20:00:00",
-    datetime: new Date("2021-10-01 20:00:00").toISOString(),
-    title: "Dinner at Restaurant",
-    super_cid: "crHjSb",
-    payer: 1,
-    attendees_ids: [2, 3],
-    price: 1200.5,
-    issplited: true,
-  },
-  {
-    id: 2,
-    datetime: new Date("2021-10-02 10:00:00").toISOString(),
-    title: "Stationery Purchase",
-    super_cid: "b63sTZ",
-    payer: 2,
-    attendees_ids: [1, 3],
-    price: 300.0,
-    issplited: false,
-  },
-  {
-    id: 3,
-    datetime: new Date("2021-10-03 12:00:00").toISOString(),
-    title: "Lunch at School",
-    super_cid: "a63sTZ",
-    payer: 3,
-    attendees_ids: [1, 2],
-    price: 100.0,
-    issplited: false,
-  },
-  {
-    id: 4,
-    datetime: new Date("2021-10-01 20:00:00").toISOString(),
-    title: "Dinner at Restaurant",
-    super_cid: "crHjSb",
-    payer: 1,
-    attendees_ids: [2, 3],
-    price: 1200.5,
-    issplited: true,
-  },
-  {
-    id: 5,
-    datetime: new Date("2021-10-02 10:00:00").toISOString(),
-    title: "Stationery Purchase",
-    super_cid: "b63sTZ",
-    payer: 2,
-    attendees_ids: [1, 3],
-    price: 300.0,
-    issplited: true,
-  },
-  {
-    id: 6,
-    datetime: new Date("2021-10-03 12:00:00").toISOString(),
-    title: "Lunch at School",
-    super_cid: "a63sTZ",
-    payer: 3,
-    attendees_ids: [1, 2],
-    price: 100.0,
-    issplited: true,
-  },
-];
+const accounting = sampleAccounting;
 
 export default function ChatroomDetails() {
   const { room_id } = useLocalSearchParams();
@@ -144,7 +59,7 @@ export default function ChatroomDetails() {
         try {
           console.log("Fetching data for room_id:", room_id);
           const response = await axios.post(
-            `http://${apiServer}/chatroom/getChatroomUsersRedis`,
+            `${apiServer}/chatroom/getChatroomUsersRedis`,
             { chatroomID: room_id }
           );
           console.log("Response data:", response.data);
@@ -209,82 +124,6 @@ export default function ChatroomDetails() {
     return <NotFoundChatroom />;
   }
 
-  // const [userdata, setUserdata] = useState<any>(null);
-  
-  // useEffect(() => {
-  //   const checkToken = async () => {
-  //     const token = localStorage.getItem("jwtToken");
-  //     console.log("Token:", token);
-  //     if (token) {
-  //       try {
-  //         const response = await axios.post(
-  //           `http://${apiServer}/auth/vertifyToken`,
-  //           { JWTtoken: token }
-  //         );
-  //         setUserdata(response.data);
-  //         localStorage.setItem("userdata", JSON.stringify(response.data));
-  //         console.log("Token exists", response.data);
-  //       } catch (error) {
-  //         console.error("checkTokenError:", error);
-  //         localStorage.removeItem("jwtToken");
-  //         await router.push("/loginPage/login");
-  //       }
-  //     } else {
-  //       await router.push("/loginPage/login");
-  //     }
-  //   };
-
-  //   checkToken();
-  // }, [router]);
-
-  // useEffect(() => {
-  //   if (userdata) {
-  //     const fetchChatrooms = async () => {
-  //       try {
-  //         const response = await axios.post(
-  //           `http://${apiServer}/split/getSplits`,
-  //           {
-  //             chatroomID: room_id, // 房號
-  //           }
-  //         );
-
-  //         // "acid": 2,
-  //         // "title": "Stationery Purchase",
-  //         // "super_cid": "b63sTZ",
-  //         // "payer": 2,
-  //         // "attendees_ids": "1,3",
-  //         // "price": "300.00",
-  //         // "issplited": 0
-
-  //         const newAccounting:Transaction[] = response.data.map(
-  //           (tran: any, index: number) => ({
-  //             id: tran.acid,
-  //             datetime: new Date().toISOString(),
-  //             title: tran.title,
-  //             super_cid: tran.super_cid,
-  //             payer: tran.payer,
-  //             attendees_ids: tran.attendees_ids.split(",").map((id: string) => parseInt(id)),
-  //             price: tran.price,
-  //             issplited: tran.issplited == 1,
-  //           })
-  //         );
-  //         const uniqueAccounting = newAccounting.filter(
-  //           (tran:Transaction, index:number, self:Transaction[]) =>
-  //             index === self.findIndex((c) => c.id === tran.id)
-  //         );
-
-  //         setTransactions(uniqueAccounting);
-  //         console.log("HAHA!", uniqueAccounting);
-  //       } catch (error) {
-  //         console.error("Error fetching accounting", error);
-  //       }
-  //     };
-
-  //     fetchChatrooms();
-  //   }
-  // }, [userdata]);
-
-
   const handleSendMessage = () => {
     if (message.trim()) {
       const newMessage = {
@@ -296,16 +135,6 @@ export default function ChatroomDetails() {
       setMessage("");
     }
   };
-
-  // const [showEmojiBoard, setShowEmojiBoard] = useState(false);
-  // const toggleEmojiBoard = () => {
-  //   setShowEmojiBoard(!showEmojiBoard);
-  // };
-
-  // const addEmoji = (emoji: { code: string}) => {
-  //   setMessage(message + emoji.code);
-  //   setShowEmojiBoard(false);
-  // };
 
   const [transactions, setTransactions] = useState(accounting);
   const [splitTransactions, setSplitTransactions] = useState<
@@ -329,76 +158,11 @@ export default function ChatroomDetails() {
   };
 
   const handleSplitButton = () => {
-    // console.log("Split button clicked");
-
-    // const fetchChatrooms = async () => {
-    //   try {
-    //     const response = await axios.post(
-    //       `http://${apiServer}/split/getSplits`,
-    //       {
-    //         chatroomID: room_id, // 房號
-    //       }
-    //     );
-
-    //     // "acid": 2,
-    //     // "title": "Stationery Purchase",
-    //     // "super_cid": "b63sTZ",
-    //     // "payer": 2,
-    //     // "attendees_ids": "1,3",
-    //     // "price": "300.00",
-    //     // "issplited": 0
-
-    //     const newAccounting:Transaction[] = response.data.map(
-    //       (tran: any, index: number) => ({
-    //         id: tran.acid,
-    //         datetime: new Date().toISOString(),
-    //         title: tran.title,
-    //         super_cid: tran.super_cid,
-    //         payer: tran.payer,
-    //         attendees_ids: tran.attendees_ids.split(",").map((id: string) => parseInt(id)),
-    //         price: tran.price,
-    //         issplited: tran.issplited == 1,
-    //       })
-    //     );
-    //     const uniqueAccounting = newAccounting.filter(
-    //       (tran:Transaction, index:number, self:Transaction[]) =>
-    //         index === self.findIndex((c) => c.id === tran.id)
-    //     );
-
-    //     setTransactions(uniqueAccounting);
-    //     console.log("HAHA!", uniqueAccounting);
-    //   } catch (error) {
-    //     console.error("Error fetching accounting", error);
-    //   }
-    // };
-
-    // // POST: /split/addSplits
-    // // {
-    // //   "title": "Event A",
-    // //   "super_cid": "crHjSb",
-    // //   "payer": 1,
-    // //   "attendees_ids": "2,3",
-    // //   "price": "52.34"
-    // // }
-    // // --------------------------------------------------------------
-    // // on status 200:
-    // // {
-    // //     "fieldCount": 0,
-    // //     "affectedRows": 1,
-    // //     "insertId": 3,
-    // //     "info": "",
-    // //     "serverStatus": 2,
-    // //     "warningStatus": 0,
-    // //     "changedRows": 0
-    // // }
-    // // on status 400: fail, nothing return
-    // fetchChatrooms();
-
     setSplitTransactions(
       formatSplitTransactions(
         transactions.filter((item) => item.issplited === false)
       )
-    );    
+    );
   };
 
   const addTransaction = (inputTransaction: InputTransactionProps) => {

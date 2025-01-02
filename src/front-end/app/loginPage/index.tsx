@@ -1,15 +1,8 @@
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import React from "react";
+import { Text, View } from "react-native";
 import styles from "./style";
 
-import { Router, Link } from "expo-router";
+import { Link } from "expo-router";
 
 export default function index() {
   return (

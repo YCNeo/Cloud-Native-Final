@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import welcome from "./welcome.tsx";
 
 const styles = StyleSheet.create({
   container: {

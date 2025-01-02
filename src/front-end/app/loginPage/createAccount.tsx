@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Text, View, TextInput, TouchableOpacity, Image } from "react-native";
+import { Text, View, TextInput, TouchableOpacity } from "react-native";
 import styles from "./style";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import axios from "axios";
 import CryptoJS from "crypto-js";
-import {Stack, useRouter, Navigator, router, Link} from 'expo-router';
+import { useRouter, Link } from "expo-router";
+import { apiServer } from "@/constants/url";
 
 export default function createAccount() {
   const [name, setName] = useState("");
@@ -12,24 +13,27 @@ export default function createAccount() {
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const frontendRouter = useRouter();
-  const handleRegister = async (name:string, email:string, password:string) => {
+  const handleRegister = async (
+    name: string,
+    email: string,
+    password: string
+  ) => {
     const hashedPassword = CryptoJS.SHA256(password).toString();
     try {
-      const response = await axios.post(`http://52.63.53.7:8000/auth/register`, {
-        name: name,
-        email: email,
-        password: hashedPassword
-      })  
-      .then(response => {
-        if (response.status === 200){
-          frontendRouter.push('/loginPage/login');
-        }
-        else if (response.status === 401) {
-          console.error("Login Fail:401")
-        }
-       })
-      .catch(error => console.error(error));
-
+      const response = await axios
+        .post(`${apiServer}/auth/register`, {
+          name: name,
+          email: email,
+          password: hashedPassword,
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            frontendRouter.push("/loginPage/login");
+          } else if (response.status === 401) {
+            console.error("Login Fail:401");
+          }
+        })
+        .catch((error) => console.error(error));
     } catch (error) {
       console.error("FUCKKKKKK!!!!!Error:", error);
     }
@@ -139,9 +143,9 @@ export default function createAccount() {
 
       {/* Create Account */}
       <Link href="/loginPage/login" asChild>
-      <TouchableOpacity>
-        <Text style={styles.createAccount}>Already have an account ?</Text>
-      </TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.createAccount}>Already have an account ?</Text>
+        </TouchableOpacity>
       </Link>
     </View>
   );

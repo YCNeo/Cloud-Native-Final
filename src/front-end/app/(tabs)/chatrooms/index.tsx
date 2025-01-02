@@ -14,6 +14,7 @@ import { useRouter } from "expo-router";
 import { FontAwesome5 } from "@expo/vector-icons";
 import io from "socket.io-client";
 import axios from "axios";
+import { apiServer, socketServer } from "@/constants/url";
 
 interface ChatroomProps {
   id: number;
@@ -45,13 +46,6 @@ const chatrooms: ChatroomProps[] = [
     name: "Chatroom 4",
   },
 ];
-
-const serverIP = "http://13.55.102.75";
-const socketPort = "8080";
-const apiPort = "8000";
-
-const socketServer = `${serverIP}:${socketPort}`;
-const apiServer = `${serverIP}:${apiPort}`;
 
 const socket = io(socketServer);
 
@@ -88,10 +82,9 @@ export default function Chatrooms() {
       console.log("Token:", token);
       if (token) {
         try {
-          const response = await axios.post(
-            `${apiServer}/auth/vertifyToken`,
-            { JWTtoken: token }
-          );
+          const response = await axios.post(`${apiServer}/auth/vertifyToken`, {
+            JWTtoken: token,
+          });
           setUserdata(response.data);
           localStorage.setItem("userdata", JSON.stringify(response.data));
           console.log("Token exists", response.data);
@@ -126,7 +119,7 @@ export default function Chatrooms() {
             })
           );
           const uniqueChatrooms = newChatrooms.filter(
-            (chatroom:ChatroomProps, index:number, self:ChatroomProps[]) =>
+            (chatroom: ChatroomProps, index: number, self: ChatroomProps[]) =>
               index === self.findIndex((c) => c.room_id === chatroom.room_id)
           );
 

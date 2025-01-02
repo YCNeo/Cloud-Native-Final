@@ -1,33 +1,9 @@
-import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  requireNativeComponent,
-  Pressable,
-} from "react-native";
-// import styles from './style.ts';
+import React from "react";
+import { Text, View, TouchableOpacity, Image, Pressable } from "react-native";
 import styles from "./style";
-import { Router, Link } from "expo-router";
-import { useRouter } from "expo-router";
+import { Link } from "expo-router";
 
 export default function Welcome() {
-  // const [isMounted, setIsMounted] = useState(false);
-  // useEffect(() => {
-  //   setIsMounted(true);
-  // }, []);
-  // const frontendRouter = useRouter();
-  // useEffect(() => {
-  //   const checkToken = async () => {
-  //     const token = localStorage.getItem("jwtToken");
-  //     if (token) {
-  //       console.log("Token exists");
-  //       frontendRouter.navigate("/(tabs)/home");
-  //     }
-  //   };
-  //   checkToken();
-  // }, [isMounted]);
   return (
     <View style={styles.container}>
       {/* Title */}

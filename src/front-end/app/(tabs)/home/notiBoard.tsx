@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
-import { Stack } from "expo-router";
 import EventCard from "@/components/app/EventCard";
 
 export default function NotiBoardPage() {

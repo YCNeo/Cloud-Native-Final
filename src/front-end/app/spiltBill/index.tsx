@@ -6,17 +6,9 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { Stack, useRouter, Navigator, router, Link } from "expo-router";
+import { useRouter, Link } from "expo-router";
 import axios from "axios";
-
-const serverIP = "http://13.55.102.75";
-const socketPort = "8080";
-const apiPort = "8000";
-
-const socketServer = `${serverIP}:${socketPort}`;
-const apiServer = `${serverIP}:${apiPort}`;
-
+import { apiServer } from "@/constants/url";
 
 const Accounting = () => {
   const frontendRouter = useRouter();

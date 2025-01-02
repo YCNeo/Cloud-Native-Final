@@ -6,9 +6,6 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import DateTimePicker, {
-  DateTimePickerEvent,
-} from "@react-native-community/datetimepicker";
 
 export type { InputTransactionProps };
 
@@ -64,19 +61,6 @@ const NewTransactionInput = ({
 
   return (
     <View style={[styles.inputContainer, { flexDirection: "row" }]}>
-      {/* <DateTimePicker
-        value={datetime}
-        mode="datetime"
-        display="default"
-        onChange={(
-          event: DateTimePickerEvent,
-          selectedDate: Date | undefined
-        ) => {
-          const currentDate = selectedDate || datetime;
-          setDatetime(currentDate);
-        }}
-        style={styles.input}
-      /> */}
       <TextInput
         placeholder="Title"
         value={title}
