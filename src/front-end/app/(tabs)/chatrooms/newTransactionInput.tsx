@@ -64,7 +64,7 @@ const NewTransactionInput = ({
 
   return (
     <View style={[styles.inputContainer, { flexDirection: "row" }]}>
-      <DateTimePicker
+      {/* <DateTimePicker
         value={datetime}
         mode="datetime"
         display="default"
@@ -76,7 +76,7 @@ const NewTransactionInput = ({
           setDatetime(currentDate);
         }}
         style={styles.input}
-      />
+      /> */}
       <TextInput
         placeholder="Title"
         value={title}

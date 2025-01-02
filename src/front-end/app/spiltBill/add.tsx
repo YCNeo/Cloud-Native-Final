@@ -20,7 +20,7 @@ const AddExpense = ({ navigation }) => {
   useEffect(() => {
     const fetchName = async () => {
       try {
-        const response = await axios.post("http://localhost:8000/split/add");
+        const response = await axios.post("http://13.211.30.75:8000/split/add");
         console.log(response.data[0].channel_name);
         setgName(response.data[0].channel_name); // 假設後端返回一個記錄數組
       } catch (error) {
@@ -59,7 +59,7 @@ const AddExpense = ({ navigation }) => {
     console.log("提交資料:", expenseData);
     try {
       const response = await axios.post(
-        "http://localhost:8000/split/addBill",
+        "http://13.211.30.75:8000/split/addBill",
         expenseData
       );
       console.log(response);

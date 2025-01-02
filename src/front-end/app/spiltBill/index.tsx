@@ -22,7 +22,7 @@ const Accounting = () => {
       console.log("fetchRecords");
       try {
         console.log("fetchRecords");
-        const response = await axios.post("http://localhost:8000/split");
+        const response = await axios.post("http://13.211.30.75:8000/split");
         console.log("Res", response);
         setRecords(response.data); // 假設後端返回一個記錄數組
       } catch (error) {

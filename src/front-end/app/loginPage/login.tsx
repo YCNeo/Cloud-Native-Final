@@ -27,7 +27,7 @@ export default function login() {
       console.log("Token:", token);       
       if (token) {
         try {
-          const response = await axios.post(`http://localhost:8000/auth/vertifyToken`, {JWTtoken: token});
+          const response = await axios.post(`http://13.211.30.75:8000/auth/vertifyToken`, {JWTtoken: token});
           const resposeTmp = response;
           console.log(response);
           console.log("Token exists", resposeTmp);
@@ -44,7 +44,7 @@ export default function login() {
   const handleLogin = async (email: string, password: string) => {
     const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
     try {
-      const response = await axios.post(`http://localhost:8000/auth/login`, {
+      const response = await axios.post(`http://13.211.30.75:8000/auth/login`, {
         email: email,
         password: hashedPassword,
       });
