@@ -22,7 +22,7 @@ import sampleMessages from "./constants/messages";
 import sampleAccounting from "./constants/accounting";
 import axios from "axios";
 
-const sockerServer = "http://localhost:8080";
+const sockerServer = "http://13.211.30.75:8080";
 const socket = io(sockerServer);
 const userId = 1; // Example user ID
 
@@ -136,7 +136,7 @@ export default function ChatroomDetails() {
         try {
           console.log("Fetching data for room_id:", room_id);
           const response = await axios.post(
-            "http://localhost:8000/chatroom/getChatroomUsersRedis",
+            "http://13.211.30.75:8000/chatroom/getChatroomUsersRedis",
             { chatroomID: room_id }
           );
           console.log("Response data:", response.data);
