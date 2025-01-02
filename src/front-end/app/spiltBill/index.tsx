@@ -9,6 +9,15 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, useRouter, Navigator, router, Link } from "expo-router";
 import axios from "axios";
+
+const serverIP = "http://13.55.102.75";
+const socketPort = "8080";
+const apiPort = "8000";
+
+const socketServer = `${serverIP}:${socketPort}`;
+const apiServer = `${serverIP}:${apiPort}`;
+
+
 const Accounting = () => {
   const frontendRouter = useRouter();
   const [records, setRecords] = useState([
@@ -22,7 +31,7 @@ const Accounting = () => {
       console.log("fetchRecords");
       try {
         console.log("fetchRecords");
-        const response = await axios.post("http://13.211.30.75:8000/split");
+        const response = await axios.post(`${apiServer}/split`);
         console.log("Res", response);
         setRecords(response.data); // 假設後端返回一個記錄數組
       } catch (error) {

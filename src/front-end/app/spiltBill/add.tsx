@@ -9,6 +9,13 @@ import {
 } from "react-native";
 import axios from "axios";
 
+const serverIP = "http://13.55.102.75";
+const socketPort = "8080";
+const apiPort = "8000";
+
+const socketServer = `${serverIP}:${socketPort}`;
+const apiServer = `${serverIP}:${apiPort}`;
+
 const AddExpense = ({ navigation }) => {
   const [payers, setPayers] = useState([""]); // 初始只有一位付款者
   const [splitters, setSplitters] = useState([""]); // 初始只有一位分帳者
@@ -20,7 +27,7 @@ const AddExpense = ({ navigation }) => {
   useEffect(() => {
     const fetchName = async () => {
       try {
-        const response = await axios.post("http://13.211.30.75:8000/split/add");
+        const response = await axios.post(`${apiServer}/split/add`);
         console.log(response.data[0].channel_name);
         setgName(response.data[0].channel_name); // 假設後端返回一個記錄數組
       } catch (error) {
@@ -59,7 +66,7 @@ const AddExpense = ({ navigation }) => {
     console.log("提交資料:", expenseData);
     try {
       const response = await axios.post(
-        "http://13.211.30.75:8000/split/addBill",
+        `${apiServer}/split/addBill`,
         expenseData
       );
       console.log(response);

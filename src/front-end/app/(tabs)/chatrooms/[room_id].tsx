@@ -22,8 +22,14 @@ import sampleMessages from "./constants/messages";
 import sampleAccounting from "./constants/accounting";
 import axios from "axios";
 
-const sockerServer = "http://13.211.30.75:8080";
-const socket = io(sockerServer);
+const serverIP = "http://13.55.102.75";
+const socketPort = "8080";
+const apiPort = "8000";
+
+const socketServer = `${serverIP}:${socketPort}`;
+const apiServer = `${serverIP}:${apiPort}`;
+
+const socket = io(socketServer);
 const userId = 1; // Example user ID
 
 const messages = sampleMessages;
@@ -138,7 +144,7 @@ export default function ChatroomDetails() {
         try {
           console.log("Fetching data for room_id:", room_id);
           const response = await axios.post(
-            "http://13.211.30.75:8000/chatroom/getChatroomUsersRedis",
+            `http://${apiServer}/chatroom/getChatroomUsersRedis`,
             { chatroomID: room_id }
           );
           console.log("Response data:", response.data);
@@ -212,7 +218,7 @@ export default function ChatroomDetails() {
   //     if (token) {
   //       try {
   //         const response = await axios.post(
-  //           `http://13.211.30.75:8000/auth/vertifyToken`,
+  //           `http://${apiServer}/auth/vertifyToken`,
   //           { JWTtoken: token }
   //         );
   //         setUserdata(response.data);
@@ -236,7 +242,7 @@ export default function ChatroomDetails() {
   //     const fetchChatrooms = async () => {
   //       try {
   //         const response = await axios.post(
-  //           "http://13.211.30.75:8000/split/getSplits",
+  //           `http://${apiServer}/split/getSplits`,
   //           {
   //             chatroomID: room_id, // 房號
   //           }
@@ -328,7 +334,7 @@ export default function ChatroomDetails() {
     // const fetchChatrooms = async () => {
     //   try {
     //     const response = await axios.post(
-    //       "http://13.211.30.75:8000/split/getSplits",
+    //       `http://${apiServer}/split/getSplits`,
     //       {
     //         chatroomID: room_id, // 房號
     //       }
