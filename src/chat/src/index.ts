@@ -22,7 +22,7 @@ const PORT = 8080;
 
 // Define the client URL
 const clientIP = "3.107.225.203";
-const clientURL = `http://${clientIP}:8081`;
+const clientURL = `https://${clientIP}:8081`;
 const corsOptions = {
   origin: clientURL,
   methods: ["GET", "POST"],

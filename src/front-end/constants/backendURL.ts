@@ -1,4 +1,4 @@
-const serverIP = "http://13.211.132.140";
+const serverIP = "https://3.25.162.86";
 const socketPort = "8080";
 const apiPort = "8000";
 
