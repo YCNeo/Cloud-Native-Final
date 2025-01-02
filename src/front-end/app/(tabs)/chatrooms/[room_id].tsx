@@ -119,6 +119,8 @@ export default function ChatroomDetails() {
   const [message, setMessage] = useState("");
   const [chatroomMessages, setChatroomMessages] = useState(messages);
 
+  console.log("room_id:", room_id);
+
   const chatroom: ChatroomProps = {
     id: 1,
     room_id: room_id ? parseInt(room_id.toString()) : 1,

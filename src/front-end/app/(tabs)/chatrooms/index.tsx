@@ -118,8 +118,13 @@ export default function Chatrooms() {
               name: chatroom.name,
             })
           );
-          setChatrooms(newChatrooms);
-          console.log("HAHA!", newChatrooms);
+          const uniqueChatrooms = newChatrooms.filter(
+            (chatroom:ChatroomProps, index:number, self:ChatroomProps[]) =>
+              index === self.findIndex((c) => c.room_id === chatroom.room_id)
+          );
+
+          setChatrooms(uniqueChatrooms);
+          console.log("HAHA!", uniqueChatrooms);
         } catch (error) {
           console.error("Error fetching chatrooms", error);
         }
