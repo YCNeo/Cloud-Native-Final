@@ -4,7 +4,7 @@ import styles from "./style";
 import { useRouter, Link } from "expo-router";
 import axios from "axios";
 import CryptoJS from "crypto-js";
-import { apiServer } from "@/constants/backendURL";
+import { expressServer } from "@/constants/backendURL";
 
 export default function login() {
   const [email, setEmail] = useState("");
@@ -18,9 +18,12 @@ export default function login() {
       console.log("Token:", token);
       if (token) {
         try {
-          const response = await axios.post(`${apiServer}/auth/vertifyToken`, {
-            JWTtoken: token,
-          });
+          const response = await axios.post(
+            `${expressServer}/auth/vertifyToken`,
+            {
+              JWTtoken: token,
+            }
+          );
           const resposeTmp = response;
           console.log(response);
           console.log("Token exists", resposeTmp);
@@ -37,7 +40,7 @@ export default function login() {
   const handleLogin = async (email: string, password: string) => {
     const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
     try {
-      const response = await axios.post(`${apiServer}/auth/login`, {
+      const response = await axios.post(`${expressServer}/auth/login`, {
         email: email,
         password: hashedPassword,
       });

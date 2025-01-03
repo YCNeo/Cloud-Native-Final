@@ -5,7 +5,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import axios from "axios";
 import CryptoJS from "crypto-js";
 import { useRouter, Link } from "expo-router";
-import { apiServer } from "@/constants/backendURL";
+import { expressServer } from "@/constants/backendURL";
 
 export default function createAccount() {
   const [name, setName] = useState("");
@@ -21,7 +21,7 @@ export default function createAccount() {
     const hashedPassword = CryptoJS.SHA256(password).toString();
     try {
       const response = await axios
-        .post(`${apiServer}/auth/register`, {
+        .post(`${expressServer}/auth/register`, {
           name: name,
           email: email,
           password: hashedPassword,

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useRouter, Link } from "expo-router";
 import axios from "axios";
-import { apiServer } from "@/constants/backendURL";
+import { expressServer } from "@/constants/backendURL";
 
 const Accounting = () => {
   const frontendRouter = useRouter();
@@ -23,7 +23,7 @@ const Accounting = () => {
       console.log("fetchRecords");
       try {
         console.log("fetchRecords");
-        const response = await axios.post(`${apiServer}/split`);
+        const response = await axios.post(`${expressServer}/split`);
         console.log("Res", response);
         setRecords(response.data); // 假設後端返回一個記錄數組
       } catch (error) {

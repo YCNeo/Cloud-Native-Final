@@ -24,7 +24,7 @@ import ChatroomProps, {
 import sampleMessages from "./constants/messages";
 import sampleAccounting from "./constants/accounting";
 import axios from "axios";
-import { apiServer, socketServer } from "@/constants/backendURL";
+import { expressServer, socketServer } from "@/constants/backendURL";
 
 const socket = io(socketServer);
 const userId = 1; // Example user ID
@@ -59,7 +59,7 @@ export default function ChatroomDetails() {
         try {
           console.log("Fetching data for room_id:", room_id);
           const response = await axios.post(
-            `${apiServer}/chatroom/getChatroomUsersRedis`,
+            `${expressServer}/chatroom/getChatroomUsersRedis`,
             { chatroomID: room_id }
           );
           console.log("Response data:", response.data);

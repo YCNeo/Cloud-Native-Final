@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import axios from "axios";
-import { apiServer } from "@/constants/backendURL";
+import { expressServer } from "@/constants/backendURL";
 
 const AddExpense = ({ navigation }) => {
   const [payers, setPayers] = useState([""]); // 初始只有一位付款者
@@ -21,7 +21,7 @@ const AddExpense = ({ navigation }) => {
   useEffect(() => {
     const fetchName = async () => {
       try {
-        const response = await axios.post(`${apiServer}/split/add`);
+        const response = await axios.post(`${expressServer}/split/add`);
         console.log(response.data[0].channel_name);
         setgName(response.data[0].channel_name); // 假設後端返回一個記錄數組
       } catch (error) {
@@ -60,7 +60,7 @@ const AddExpense = ({ navigation }) => {
     console.log("提交資料:", expenseData);
     try {
       const response = await axios.post(
-        `${apiServer}/split/addBill`,
+        `${expressServer}/split/addBill`,
         expenseData
       );
       console.log(response);

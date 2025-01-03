@@ -14,7 +14,7 @@ import { useRouter } from "expo-router";
 import { FontAwesome5 } from "@expo/vector-icons";
 import io from "socket.io-client";
 import axios from "axios";
-import { apiServer, socketServer } from "@/constants/backendURL";
+import { expressServer, socketServer } from "@/constants/backendURL";
 
 interface ChatroomProps {
   id: number;
@@ -82,9 +82,12 @@ export default function Chatrooms() {
       console.log("Token:", token);
       if (token) {
         try {
-          const response = await axios.post(`${apiServer}/auth/vertifyToken`, {
-            JWTtoken: token,
-          });
+          const response = await axios.post(
+            `${expressServer}/auth/vertifyToken`,
+            {
+              JWTtoken: token,
+            }
+          );
           setUserdata(response.data);
           localStorage.setItem("userdata", JSON.stringify(response.data));
           console.log("Token exists", response.data);
@@ -106,7 +109,7 @@ export default function Chatrooms() {
       const fetchChatrooms = async () => {
         try {
           const response = await axios.post(
-            `${apiServer}/chatroom/userGetChatroomRedis`,
+            `${expressServer}/chatroom/userGetChatroomRedis`,
             {
               user: userdata.userID, // 使用從 token 中獲取的使用者 ID
             }
@@ -178,7 +181,7 @@ export default function Chatrooms() {
     const chars =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let code = "";
-    const res = await axios.get(`${apiServer}/chatroom/getChatrooms`);
+    const res = await axios.get(`${expressServer}/chatroom/getChatrooms`);
     console.log(res.data);
 
     let uniqueFound = false;
@@ -195,7 +198,7 @@ export default function Chatrooms() {
 
   const confirmChatroom = () => {
     const parsedUserData = JSON.parse(localStorage.getItem("userData") || "{}");
-    axios.post(`${apiServer}/chatroom/createChatroom`, {
+    axios.post(`${expressServer}/chatroom/createChatroom`, {
       roomId: randomCode,
       roomName: chatroomName,
       userId: userdata.userID,
