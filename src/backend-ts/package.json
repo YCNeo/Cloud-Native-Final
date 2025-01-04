@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "deno run --allow-all src/index.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +31,7 @@
     "nodemailer": "^6.9.16"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/crypto-js": "^4.2.2",
     "@types/express": "^5.0.0",
     "@types/ioredis": "^4.28.10",
