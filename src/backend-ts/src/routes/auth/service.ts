@@ -172,7 +172,7 @@ function registerVertifyMail(receiverMail: string): string {
   const randomString = Math.random().toString(36).substr(2);
   console.log(randomString);
   const token = CryptoJS.SHA256(randomString).toString(CryptoJS.enc.Hex);
-  const verificationLink = `http://${process.env.BACKEND_HOST}:${process.env.BACKEND_PORT}/auth/registerVertifyMail?token=${token}`;
+  const verificationLink = `http://groupup.neoycn.xyz/express/auth/registerVertifyMail?token=${token}`;
 
   let mailOptions = {
     from: process.env.MAILSENDER, //寄件人emai
